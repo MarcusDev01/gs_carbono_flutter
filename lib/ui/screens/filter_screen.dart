@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:gs_carbono_flutter/model/app_state.dart';
+import 'package:provider/provider.dart';
+
 
 class FilterScreen extends StatefulWidget {
   const FilterScreen({super.key});
@@ -8,7 +11,7 @@ class FilterScreen extends StatefulWidget {
 }
 
 class _FilterScreenState extends State<FilterScreen> {
-  final Set<String> _selected = {};
+  late Set<String> _selected;
 
   final List<String> _options = [
     'Transporte',
@@ -19,7 +22,15 @@ class _FilterScreenState extends State<FilterScreen> {
   ];
 
   @override
+  void initState() {
+    super.initState();
+    _selected = Set.from(Provider.of<AppState>(context, listen: false).selectedFilters);
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final isDarkMode = Provider.of<AppState>(context).darkMode;
+
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(60),
@@ -41,7 +52,10 @@ class _FilterScreenState extends State<FilterScreen> {
             ),
             actions: [
               TextButton(
-                onPressed: () => setState(() => _selected.clear()),
+                onPressed: () {
+                  setState(() => _selected.clear());
+                  Provider.of<AppState>(context, listen: false).clearFilters();
+                },
                 child: const Text('Limpar', style: TextStyle(color: Colors.white)),
               ),
             ],
@@ -55,7 +69,13 @@ class _FilterScreenState extends State<FilterScreen> {
             final isSelected = _selected.contains(option);
             return Card(
               child: CheckboxListTile(
-                title: Text(option, style: const TextStyle(fontSize: 16)),
+                title: Text(
+                  option,
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: isDarkMode ? Colors.white : Colors.black,
+                  ),
+                ),
                 value: isSelected,
                 onChanged: (bool? value) {
                   setState(() {
@@ -64,6 +84,7 @@ class _FilterScreenState extends State<FilterScreen> {
                     } else {
                       _selected.remove(option);
                     }
+                    Provider.of<AppState>(context, listen: false).updateFilters(_selected);
                   });
                 },
                 activeColor: const Color(0xFF2E7D32),
