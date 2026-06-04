@@ -13,7 +13,10 @@ class SettingsScreen extends StatelessWidget {
         child: Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
-              colors: [Color(0xFF2E7D32), Color(0xFF00897B)],
+              colors: [
+                Color(0xFF1E3A8A),
+                Color(0xFF06B6D4),
+              ],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
@@ -21,9 +24,15 @@ class SettingsScreen extends StatelessWidget {
           child: AppBar(
             backgroundColor: Colors.transparent,
             elevation: 0,
-            title: const Text('Configurações', style: TextStyle(color: Colors.white)),
+            title: const Text(
+              'Configurações',
+              style: TextStyle(color: Colors.white),
+            ),
             leading: IconButton(
-              icon: const Icon(Icons.arrow_back, color: Colors.white),
+              icon: const Icon(
+                Icons.arrow_back,
+                color: Colors.white,
+              ),
               onPressed: () => Navigator.pop(context),
             ),
           ),
@@ -41,64 +50,80 @@ class SettingsScreen extends StatelessWidget {
                       'Notificações',
                       style: TextStyle(
                         fontSize: 16,
-                        color: appState.darkMode ? Colors.white : Colors.black,
+                        color: appState.darkMode
+                            ? Colors.white
+                            : Colors.black,
                       ),
                     ),
                     subtitle: Text(
                       'Receba alertas',
                       style: TextStyle(
                         fontSize: 14,
-                        color: appState.darkMode ? Colors.white70 : Colors.grey,
+                        color: appState.darkMode
+                            ? Colors.white70
+                            : Colors.grey,
                       ),
                     ),
                     value: true,
                     onChanged: (value) {},
-                    activeColor: const Color(0xFF2E7D32),
+                    activeColor: const Color(0xFF06B6D4),
                   ),
                 ),
+
                 const SizedBox(height: 8),
+
                 Card(
                   child: SwitchListTile(
                     title: Text(
                       'Modo escuro',
                       style: TextStyle(
                         fontSize: 16,
-                        color: appState.darkMode ? Colors.white : Colors.black,
+                        color: appState.darkMode
+                            ? Colors.white
+                            : Colors.black,
                       ),
                     ),
                     subtitle: Text(
                       'Ativar tema escuro',
                       style: TextStyle(
                         fontSize: 14,
-                        color: appState.darkMode ? Colors.white70 : Colors.grey,
+                        color: appState.darkMode
+                            ? Colors.white70
+                            : Colors.grey,
                       ),
                     ),
                     value: appState.darkMode,
                     onChanged: (value) {
                       appState.toggleDarkMode();
                     },
-                    activeColor: const Color(0xFF00897B),
+                    activeColor: const Color(0xFF8B5CF6),
                   ),
                 ),
+
                 const SizedBox(height: 8),
+
                 Card(
                   child: ListTile(
-                    leading: Icon(
+                    leading: const Icon(
                       Icons.info,
-                      color: const Color(0xFF1976D2),
+                      color: Color(0xFF06B6D4),
                     ),
                     title: Text(
                       'Versão',
                       style: TextStyle(
                         fontSize: 16,
-                        color: appState.darkMode ? Colors.white : Colors.black,
+                        color: appState.darkMode
+                            ? Colors.white
+                            : Colors.black,
                       ),
                     ),
                     subtitle: Text(
                       '1.0.0',
                       style: TextStyle(
                         fontSize: 14,
-                        color: appState.darkMode ? Colors.white70 : Colors.grey,
+                        color: appState.darkMode
+                            ? Colors.white70
+                            : Colors.grey,
                       ),
                     ),
                   ),

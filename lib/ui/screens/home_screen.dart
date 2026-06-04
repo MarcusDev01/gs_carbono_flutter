@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:gs_carbono_flutter/model/app_state.dart';
 import 'package:provider/provider.dart';
 
-
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
@@ -14,7 +13,10 @@ class HomeScreen extends StatelessWidget {
         child: Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
-              colors: [Color(0xFF2E7D32), Color(0xFF00897B)],
+              colors: [
+                Color(0xFF1E3A8A),
+                Color(0xFF06B6D4),
+              ],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
@@ -24,12 +26,20 @@ class HomeScreen extends StatelessWidget {
             elevation: 0,
             title: const Text(
               'Dashboard',
-              style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
             ),
             actions: [
               IconButton(
-                icon: const Icon(Icons.settings, color: Colors.white),
-                onPressed: () => Navigator.pushNamed(context, '/settings'),
+                icon: const Icon(
+                  Icons.settings,
+                  color: Colors.white,
+                ),
+                onPressed: () =>
+                    Navigator.pushNamed(context, '/settings'),
               ),
             ],
           ),
@@ -49,19 +59,28 @@ class HomeScreen extends StatelessWidget {
                     padding: const EdgeInsets.all(12),
                     margin: const EdgeInsets.only(bottom: 16),
                     decoration: BoxDecoration(
-                      color: isDarkMode ? const Color(0xFF2E7D32).withOpacity(0.3) : const Color(0xFF2E7D32).withOpacity(0.1),
+                      color: isDarkMode
+                          ? const Color(0xFF1E3A8A)
+                              .withOpacity(0.30)
+                          : const Color(0xFF06B6D4)
+                              .withOpacity(0.10),
                       borderRadius: BorderRadius.circular(8),
-                      border: Border.all(color: const Color(0xFF2E7D32)),
+                      border: Border.all(
+                        color: const Color(0xFF06B6D4),
+                      ),
                     ),
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment:
+                          CrossAxisAlignment.start,
                       children: [
                         Text(
                           'Filtros aplicados:',
                           style: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.bold,
-                            color: isDarkMode ? Colors.white : Colors.black,
+                            color: isDarkMode
+                                ? Colors.white
+                                : Colors.black,
                           ),
                         ),
                         const SizedBox(height: 8),
@@ -72,7 +91,8 @@ class HomeScreen extends StatelessWidget {
                               label: Text(filter),
                               onDeleted: () {
                                 appState.updateFilters(
-                                  selectedFilters..remove(filter),
+                                  selectedFilters
+                                    ..remove(filter),
                                 );
                               },
                             );
@@ -81,6 +101,7 @@ class HomeScreen extends StatelessWidget {
                       ],
                     ),
                   ),
+
                 Expanded(
                   child: GridView.count(
                     crossAxisCount: 2,
@@ -90,30 +111,49 @@ class HomeScreen extends StatelessWidget {
                       _DashboardCard(
                         icon: Icons.eco,
                         title: 'Emissões',
-                        subtitle: selectedFilters.isEmpty ? '12.4 tCO₂' : '${selectedFilters.length} filtros',
-                        color: const Color(0xFF2E7D32),
-                        onTap: () => Navigator.pushNamed(context, '/details'),
+                        subtitle: selectedFilters.isEmpty
+                            ? '12.4 tCO₂'
+                            : '${selectedFilters.length} filtros',
+                        color: const Color(0xFF06B6D4),
+                        onTap: () => Navigator.pushNamed(
+                          context,
+                          '/details',
+                        ),
                       ),
+
                       _DashboardCard(
                         icon: Icons.filter_list,
                         title: 'Filtros',
-                        subtitle: selectedFilters.isEmpty ? 'Aplicar filtros' : '${selectedFilters.length} ativo(s)',
-                        color: const Color(0xFF00897B),
-                        onTap: () => Navigator.pushNamed(context, '/filter'),
+                        subtitle: selectedFilters.isEmpty
+                            ? 'Aplicar filtros'
+                            : '${selectedFilters.length} ativo(s)',
+                        color: const Color(0xFF8B5CF6),
+                        onTap: () => Navigator.pushNamed(
+                          context,
+                          '/filter',
+                        ),
                       ),
+
                       _DashboardCard(
                         icon: Icons.bar_chart,
                         title: 'Estatísticas',
                         subtitle: 'Ver gráficos',
-                        color: const Color(0xFF1976D2),
-                        onTap: () => Navigator.pushNamed(context, '/statistics'),
+                        color: const Color(0xFF3B82F6),
+                        onTap: () => Navigator.pushNamed(
+                          context,
+                          '/statistics',
+                        ),
                       ),
+
                       _DashboardCard(
                         icon: Icons.settings,
                         title: 'Configurações',
                         subtitle: 'Ajustes',
-                        color: const Color(0xFF388E3C),
-                        onTap: () => Navigator.pushNamed(context, '/settings'),
+                        color: const Color(0xFF6366F1),
+                        onTap: () => Navigator.pushNamed(
+                          context,
+                          '/settings',
+                        ),
                       ),
                     ],
                   ),
@@ -144,28 +184,38 @@ class _DashboardCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDarkMode = Provider.of<AppState>(context).darkMode;
+    final isDarkMode =
+        Provider.of<AppState>(context).darkMode;
 
     return Card(
       elevation: 4,
       shadowColor: Colors.black26,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+      ),
       child: InkWell(
         onTap: onTap,
         borderRadius: BorderRadius.circular(12),
         child: Padding(
           padding: const EdgeInsets.all(16),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment:
+                MainAxisAlignment.center,
             children: [
-              Icon(icon, size: 48, color: color),
+              Icon(
+                icon,
+                size: 48,
+                color: color,
+              ),
               const SizedBox(height: 8),
               Text(
                 title,
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
-                  color: isDarkMode ? Colors.white : Colors.black,
+                  color: isDarkMode
+                      ? Colors.white
+                      : Colors.black,
                 ),
               ),
               const SizedBox(height: 4),
@@ -173,7 +223,9 @@ class _DashboardCard extends StatelessWidget {
                 subtitle,
                 style: TextStyle(
                   fontSize: 14,
-                  color: isDarkMode ? Colors.white70 : Colors.grey,
+                  color: isDarkMode
+                      ? Colors.white70
+                      : Colors.grey,
                 ),
               ),
             ],
