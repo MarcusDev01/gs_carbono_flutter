@@ -85,6 +85,7 @@ flutter test --coverage
 
 👤 Autores
 NomeGitHubMarcus Dev@MarcusDev01
+Heny Titotto
 
 📄 Licença
 Este projeto foi desenvolvido para fins acadêmicos como parte da Global Solution — FIAP. Todos os direitos reservados aos autores.
